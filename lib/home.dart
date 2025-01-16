@@ -21,11 +21,10 @@ class _HomeViewState extends State<HomeView> {
         q: "schild text-center w-full",
         children: [
           FContainer(
-            q: "bg-red-500 w-75% text-green rounded-lg p-4 mb-4 shadow-lg rd-16 text-right",
+            q: "bg-red-500 w-75% text-white rounded-lg p-4 mb-4 shadow-lg rd-16 text-right",
             children: [
               FText(
                 "Hello",
-                q: "text-white text-lg font-bold",
               ),
               FText(
                 "World",

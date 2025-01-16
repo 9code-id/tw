@@ -4,7 +4,10 @@ class FText extends StatelessWidget {
   final String text;
   final String q;
 
-  FText(this.text, {required this.q});
+  FText(
+    this.text, {
+    this.q = "",
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,8 @@ class FText extends StatelessWidget {
     if (q.contains('italic')) styles['fontStyle'] = FontStyle.italic;
 
     // Parsing text decoration
-    if (q.contains('underline')) styles['textDecoration'] = TextDecoration.underline;
+    if (q.contains('underline'))
+      styles['textDecoration'] = TextDecoration.underline;
 
     // Parsing text alignment
     if (q.contains('text-right')) styles['textAlign'] = TextAlign.right;

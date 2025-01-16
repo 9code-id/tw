@@ -8,7 +8,10 @@ class FContainer extends StatelessWidget {
   final String q;
   final List<Widget> children;
 
-  FContainer({required this.q, required this.children});
+  FContainer({
+    required this.children,
+    this.q = "",
+  });
 
   @override
   Widget build(BuildContext context) {
