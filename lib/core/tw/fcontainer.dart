@@ -50,13 +50,15 @@ class FContainer extends StatelessWidget {
         children: children,
       );
     } else if (isListView) {
-      widget = ListView(
+      widget = ListView.separated(
         shrinkWrap: true,
-        children: children,
+        itemCount: children.length,
+        separatorBuilder: (context, index) => SizedBox(height: spacing ?? 0.0),
+        itemBuilder: (context, index) => children[index],
       );
     } else if (isGridView) {
       int crossAxisCount = q.intValueOf("grid-cols-") ?? 2;
-      widget = GridView(
+      widget = GridView.builder(
         padding: EdgeInsets.zero,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: 1.0,
@@ -66,7 +68,8 @@ class FContainer extends StatelessWidget {
         ),
         shrinkWrap: true,
         physics: const ScrollPhysics(),
-        children: children,
+        itemCount: children.length,
+        itemBuilder: (context, index) => children[index],
       );
     } else if (isSingleChildScrollView) {
       widget = SingleChildScrollView(

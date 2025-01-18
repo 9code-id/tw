@@ -63,7 +63,7 @@ class _HomeViewState extends State<HomeView> {
         },
       ),
       FContainer(
-        q: "list gap-4 pl-20 bg-yellow",
+        q: "list gap-12 bg-purple",
         children: [
           Container(
             height: 100,
@@ -102,27 +102,6 @@ class _HomeViewState extends State<HomeView> {
             q: "left-10 top-10 right-10 bottom-10 bg-blue rd-12 shadow-lg",
             children: [],
           ),
-          // Container(
-          //   height: 100,
-          //   width: 100,
-          //   decoration: const BoxDecoration(
-          //     color: Colors.yellow,
-          //   ),
-          // ),
-          // Container(
-          //   height: 100,
-          //   width: 100,
-          //   decoration: const BoxDecoration(
-          //     color: Colors.red,
-          //   ),
-          // ),
-          // Container(
-          //   height: 100,
-          //   width: 100,
-          //   decoration: const BoxDecoration(
-          //     color: Colors.green,
-          //   ),
-          // ),
         ],
       ),
     ];
@@ -133,19 +112,9 @@ class _HomeViewState extends State<HomeView> {
         title: const Text("Dashboard"),
         actions: const [],
       ),
-      body: ValueListenableBuilder(
-        valueListenable: selected,
-        builder: (context, __, _) {
-          return SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.all(16.0), // Use consistent padding
-              child: Column(
-                spacing: 16.0, // Use consistent spacing
-                children: children,
-              ),
-            ),
-          );
-        },
+      body: FContainer(
+        q: "schild p-12 gap-12",
+        children: children,
       ),
     );
   }
