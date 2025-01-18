@@ -363,7 +363,7 @@ extension TWStringExtension on String {
 
   double? doubleValueOf(String key) {
     String q = this;
-    final regex = RegExp(r'(?<!\S)' + key + r'(\d+)');
+    final regex = RegExp(r'(?<!\S)' + key + r'(\d+(\.\d+)?)');
     final match = regex.firstMatch(q);
 
     if (match != null) {

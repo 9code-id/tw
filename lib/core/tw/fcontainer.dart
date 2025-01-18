@@ -58,10 +58,11 @@ class FContainer extends StatelessWidget {
       );
     } else if (isGridView) {
       int crossAxisCount = q.intValueOf("grid-cols-") ?? 2;
+      double aspectRatio = q.doubleValueOf("grid-ar-") ?? 1.0;
       widget = GridView.builder(
         padding: EdgeInsets.zero,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 1.0,
+          childAspectRatio: aspectRatio,
           crossAxisCount: crossAxisCount,
           crossAxisSpacing: spacing ?? (spacingX ?? 0.0),
           mainAxisSpacing: spacing ?? (spacingY ?? 0.0),

@@ -25,7 +25,7 @@ class _HomeViewState extends State<HomeView> {
         valueListenable: selected,
         builder: (context, __, _) {
           return FContainer(
-            q: "grid grid-cols-2 gap-4 bg-${selected.value ? "red" : "blue"}-100 p-12",
+            q: "grid grid-cols-2 grid-ar-1.0 gap-4 bg-${selected.value ? "red" : "blue"}-100 p-12",
             children: [
               InkWell(
                 onTap: () => temporarySelect(),
