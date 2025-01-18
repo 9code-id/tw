@@ -6,11 +6,19 @@ import 'parsers.dart';
 
 class FContainer extends StatelessWidget {
   final String q;
-  final List<Widget> children;
+  final ScrollController? controller;
+  final Widget? child;
+  final List<Widget>? children;
+  final int? itemCount;
+  final Widget? Function(BuildContext, int)? itemBuilder;
 
   FContainer({
-    required this.children,
+    this.child,
+    this.children,
     this.q = "",
+    this.controller,
+    this.itemCount,
+    this.itemBuilder,
   });
 
   @override
@@ -29,13 +37,17 @@ class FContainer extends StatelessWidget {
     double? spacing = styles['spacing'];
     double? spacingX = styles['x-spacing'];
     double? spacingY = styles['y-spacing'];
+    bool isAxisHorizontal = q.matchContains("axis-x");
+    bool isAxisVertical = !isAxisHorizontal;
+
+    bool itemBuilderMode = itemCount != null && itemBuilder != null;
 
     if (isRow) {
       widget = Row(
         crossAxisAlignment:
             styles['crossAxisAlignment'] ?? CrossAxisAlignment.start,
         spacing: styles['spacing'],
-        children: children,
+        children: children ?? [],
       );
     } else if (isWrap) {
       widget = Wrap(
@@ -43,23 +55,50 @@ class FContainer extends StatelessWidget {
         //     styles['crossAxisAlignment'] ?? CrossAxisAlignment.start,
         spacing: spacing ?? (spacingX ?? 0.0),
         runSpacing: spacing ?? (spacingY ?? 0.0),
-        children: children,
+        children: children ?? [],
       );
     } else if (isStack) {
       widget = Stack(
-        children: children,
+        children: children ?? [],
       );
     } else if (isListView) {
-      widget = ListView.separated(
-        shrinkWrap: true,
-        itemCount: children.length,
-        separatorBuilder: (context, index) => SizedBox(height: spacing ?? 0.0),
-        itemBuilder: (context, index) => children[index],
-      );
+      if (isAxisVertical) {
+        widget = ListView.separated(
+          controller: controller,
+          shrinkWrap: true,
+          separatorBuilder: (context, index) =>
+              SizedBox(height: spacing ?? 0.0),
+          itemCount: itemBuilderMode ? itemCount! : children!.length,
+          itemBuilder: (context, index) =>
+              itemBuilderMode ? itemBuilder!(context, index) : children![index],
+        );
+      } else {
+        if (styles["height"] == null) {
+          return errorWidget(
+            "Height is required for horizontal ListView, eg: h-100",
+          );
+        }
+
+        widget = Container(
+          height: styles["height"],
+          child: ListView.separated(
+            controller: controller,
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            separatorBuilder: (context, index) =>
+                SizedBox(height: spacing ?? 0.0),
+            itemCount: itemBuilderMode ? itemCount! : children!.length,
+            itemBuilder: (context, index) => itemBuilderMode
+                ? itemBuilder!(context, index)
+                : children![index],
+          ),
+        );
+      }
     } else if (isGridView) {
       int crossAxisCount = q.intValueOf("grid-cols-") ?? 2;
       double aspectRatio = q.doubleValueOf("grid-ar-") ?? 1.0;
       widget = GridView.builder(
+        controller: controller,
         padding: EdgeInsets.zero,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: aspectRatio,
@@ -69,25 +108,45 @@ class FContainer extends StatelessWidget {
         ),
         shrinkWrap: true,
         physics: const ScrollPhysics(),
-        itemCount: children.length,
-        itemBuilder: (context, index) => children[index],
+        itemCount: itemBuilderMode ? itemCount! : children!.length,
+        itemBuilder: (context, index) =>
+            itemBuilderMode ? itemBuilder!(context, index) : children![index],
       );
     } else if (isSingleChildScrollView) {
-      widget = SingleChildScrollView(
-        child: Column(
+      if (isAxisVertical) {
+        widget = SingleChildScrollView(
+          controller: controller,
+          scrollDirection: isAxisHorizontal ? Axis.horizontal : Axis.vertical,
+          child: Column(
+            crossAxisAlignment:
+                styles['crossAxisAlignment'] ?? CrossAxisAlignment.start,
+            spacing: styles['spacing'],
+            children: children!,
+          ),
+        );
+      } else {
+        widget = SingleChildScrollView(
+          controller: controller,
+          scrollDirection: isAxisHorizontal ? Axis.horizontal : Axis.vertical,
+          child: Row(
+            crossAxisAlignment:
+                styles['crossAxisAlignment'] ?? CrossAxisAlignment.start,
+            spacing: styles['spacing'],
+            children: children!,
+          ),
+        );
+      }
+    } else {
+      if (children != null) {
+        widget = Column(
           crossAxisAlignment:
               styles['crossAxisAlignment'] ?? CrossAxisAlignment.start,
           spacing: styles['spacing'],
-          children: children,
-        ),
-      );
-    } else {
-      widget = Column(
-        crossAxisAlignment:
-            styles['crossAxisAlignment'] ?? CrossAxisAlignment.start,
-        spacing: styles['spacing'],
-        children: children,
-      );
+          children: children!,
+        );
+      } else {
+        widget = child!;
+      }
     }
 
     final container = Container(
@@ -129,4 +188,17 @@ class FContainer extends StatelessWidget {
 
     return finalWidget;
   }
+}
+
+Widget errorWidget(String message) {
+  return Container(
+    color: Colors.red,
+    padding: const EdgeInsets.all(12.0),
+    child: Text(
+      message,
+      style: TextStyle(
+        color: Colors.white,
+      ),
+    ),
+  );
 }

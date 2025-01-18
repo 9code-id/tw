@@ -10,7 +10,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   ValueNotifier<bool> selected = ValueNotifier(false);
-
+  ScrollController scrollController = ScrollController();
   temporarySelect() async {
     selected.value = true;
     await Future.delayed(const Duration(seconds: 1));
@@ -21,6 +21,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     List<Widget> children = [
       // PreviewWidget(),
+
       ValueListenableBuilder(
         valueListenable: selected,
         builder: (context, __, _) {
@@ -61,6 +62,80 @@ class _HomeViewState extends State<HomeView> {
             ],
           );
         },
+      ),
+      FContainer(
+        q: "h-400",
+        child: FContainer(
+          q: "list gap-12 bg-purple p-20",
+          // controller: scrollController,
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return Container(
+              height: 100,
+              width: 100,
+              decoration: const BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                "$index",
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+      FContainer(
+        q: "list axis-x h-100 gap-12 bg-purple",
+        controller: scrollController,
+        children: [
+          Container(
+            height: 100,
+            width: 100,
+            decoration: const BoxDecoration(
+              color: Colors.blue,
+            ),
+          ),
+          Container(
+            height: 100,
+            width: 100,
+            decoration: const BoxDecoration(
+              color: Colors.yellow,
+            ),
+          ),
+          Container(
+            height: 100,
+            width: 100,
+            decoration: const BoxDecoration(
+              color: Colors.red,
+            ),
+          ),
+          Container(
+            height: 100,
+            width: 100,
+            decoration: const BoxDecoration(
+              color: Colors.green,
+            ),
+          ),
+        ],
+      ),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+        ),
+        onPressed: () {
+          //scroll to end
+          scrollController.animateTo(
+            scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeOut,
+          );
+        },
+        child: const Text("Test Horizontal List Sroll"),
       ),
       FContainer(
         q: "list gap-12 bg-purple",
