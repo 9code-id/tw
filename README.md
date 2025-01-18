@@ -2,19 +2,6 @@
 
 A new Flutter project.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
 ## Tailwind-like Container and Text Widgets
 
 This project includes custom Flutter widgets `FContainer` and `FText` that mimic Tailwind CSS styling.
@@ -34,6 +21,10 @@ This project includes custom Flutter widgets `FContainer` and `FText` that mimic
 - Spacing: `gap-{value}`, `gap-x-{value}`, `gap-y-{value}`
 - Text alignment: `text-left`, `text-center`, `text-right`
 - Animation: `animate-none`, `animate-spin`, `animate-ping`, `animate-pulse`, `animate-bounce`
+- Positioning: `left-{value}`, `right-{value}`, `top-{value}`, `bottom-{value}`
+- Layouts: `row`, `wrap`, `stack`, `schild`, `list`, `grid`
+- Shrink Wrap: `shrinkWrap`
+- Axis: `axis-x`, `axis-y`
 
 ### Usage
 
@@ -169,3 +160,28 @@ FText(
 - `animate-ping`
 - `animate-pulse`
 - `animate-bounce`
+
+#### Positioning
+
+- `left-{value}`
+- `right-{value}`
+- `top-{value}`
+- `bottom-{value}`
+
+#### Layouts
+
+- `row`
+- `wrap`
+- `stack`
+- `schild`
+- `list`
+- `grid`
+
+#### Shrink Wrap
+
+- `shrinkWrap`
+
+#### Axis
+
+- `axis-x`
+- `axis-y`

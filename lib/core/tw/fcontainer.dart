@@ -42,6 +42,8 @@ class FContainer extends StatelessWidget {
 
     bool itemBuilderMode = itemCount != null && itemBuilder != null;
 
+    bool isShrinkWrap = q.matchContains("shrinkWrap");
+
     if (isRow) {
       widget = Row(
         crossAxisAlignment:
@@ -65,7 +67,7 @@ class FContainer extends StatelessWidget {
       if (isAxisVertical) {
         widget = ListView.separated(
           controller: controller,
-          shrinkWrap: true,
+          shrinkWrap: isShrinkWrap,
           separatorBuilder: (context, index) =>
               SizedBox(height: spacing ?? 0.0),
           itemCount: itemBuilderMode ? itemCount! : children!.length,
@@ -83,7 +85,7 @@ class FContainer extends StatelessWidget {
           height: styles["height"],
           child: ListView.separated(
             controller: controller,
-            shrinkWrap: true,
+            shrinkWrap: isShrinkWrap,
             scrollDirection: Axis.horizontal,
             separatorBuilder: (context, index) =>
                 SizedBox(height: spacing ?? 0.0),
@@ -106,7 +108,7 @@ class FContainer extends StatelessWidget {
           crossAxisSpacing: spacing ?? (spacingX ?? 0.0),
           mainAxisSpacing: spacing ?? (spacingY ?? 0.0),
         ),
-        shrinkWrap: true,
+        shrinkWrap: isShrinkWrap,
         physics: const ScrollPhysics(),
         itemCount: itemBuilderMode ? itemCount! : children!.length,
         itemBuilder: (context, index) =>

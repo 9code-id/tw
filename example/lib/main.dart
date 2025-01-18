@@ -1,5 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:tw/core/tw/fcontainer.dart';
+import 'package:tw/core.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const TwDemoHomeView(),
+    );
+  }
+}
 
 class TwDemoHomeView extends StatefulWidget {
   const TwDemoHomeView({super.key});
@@ -20,8 +39,6 @@ class _TwDemoHomeViewState extends State<TwDemoHomeView> {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [
-      // PreviewWidget(),
-
       ValueListenableBuilder(
         valueListenable: selected,
         builder: (context, __, _) {
