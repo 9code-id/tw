@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tw/core/tw/fcontainer.dart';
-import 'package:tw/core/tw/ftext.dart';
-import 'package:tw/preview.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -12,10 +9,122 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  ValueNotifier<bool> selected = ValueNotifier(false);
+
+  temporarySelect() async {
+    selected.value = true;
+    await Future.delayed(const Duration(seconds: 1));
+    selected.value = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [
-      PreviewWidget(),
+      // PreviewWidget(),
+      ValueListenableBuilder(
+        valueListenable: selected,
+        builder: (context, __, _) {
+          return FContainer(
+            q: "grid grid-cols-2 gap-4 bg-${selected.value ? "red" : "blue"}-100 p-12",
+            children: [
+              InkWell(
+                onTap: () => temporarySelect(),
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  decoration: const BoxDecoration(
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
+              Container(
+                height: 100,
+                width: 100,
+                decoration: const BoxDecoration(
+                  color: Colors.yellow,
+                ),
+              ),
+              Container(
+                height: 100,
+                width: 100,
+                decoration: const BoxDecoration(
+                  color: Colors.red,
+                ),
+              ),
+              Container(
+                height: 100,
+                width: 100,
+                decoration: const BoxDecoration(
+                  color: Colors.green,
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+      FContainer(
+        q: "list gap-4 pl-20 bg-yellow",
+        children: [
+          Container(
+            height: 100,
+            width: 100,
+            decoration: const BoxDecoration(
+              color: Colors.blue,
+            ),
+          ),
+          Container(
+            height: 100,
+            width: 100,
+            decoration: const BoxDecoration(
+              color: Colors.yellow,
+            ),
+          ),
+          Container(
+            height: 100,
+            width: 100,
+            decoration: const BoxDecoration(
+              color: Colors.red,
+            ),
+          ),
+          Container(
+            height: 100,
+            width: 100,
+            decoration: const BoxDecoration(
+              color: Colors.green,
+            ),
+          ),
+        ],
+      ),
+      FContainer(
+        q: "stack w-full bg-yellow-100 h-300",
+        children: [
+          FContainer(
+            q: "left-10 top-10 right-10 bottom-10 bg-blue rd-12 shadow-lg",
+            children: [],
+          ),
+          // Container(
+          //   height: 100,
+          //   width: 100,
+          //   decoration: const BoxDecoration(
+          //     color: Colors.yellow,
+          //   ),
+          // ),
+          // Container(
+          //   height: 100,
+          //   width: 100,
+          //   decoration: const BoxDecoration(
+          //     color: Colors.red,
+          //   ),
+          // ),
+          // Container(
+          //   height: 100,
+          //   width: 100,
+          //   decoration: const BoxDecoration(
+          //     color: Colors.green,
+          //   ),
+          // ),
+        ],
+      ),
     ];
 
     return Scaffold(
@@ -24,14 +133,19 @@ class _HomeViewState extends State<HomeView> {
         title: const Text("Dashboard"),
         actions: const [],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(16.0), // Use consistent padding
-          child: Column(
-            spacing: 16.0, // Use consistent spacing
-            children: children,
-          ),
-        ),
+      body: ValueListenableBuilder(
+        valueListenable: selected,
+        builder: (context, __, _) {
+          return SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(16.0), // Use consistent padding
+              child: Column(
+                spacing: 16.0, // Use consistent spacing
+                children: children,
+              ),
+            ),
+          );
+        },
       ),
     );
   }

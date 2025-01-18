@@ -17,15 +17,18 @@ class FContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final styles = parseTailwindStyles(context, q);
 
-    final arr = q.split(" ");
-    bool isRow = arr.contains("row");
-    bool isWrap = arr.contains("wrap");
-    bool isStack = arr.contains("stack");
-    bool isSingleChildScrollView = arr.contains("schild");
-    bool isListView = arr.contains("list");
-    bool isGridView = arr.contains("grid");
+    bool isRow = q.matchContains("row");
+    bool isWrap = q.matchContains("wrap");
+    bool isStack = q.matchContains("stack");
+    bool isSingleChildScrollView = q.matchContains("schild");
+    bool isListView = q.matchContains("list");
+    bool isGridView = q.matchContains("grid");
+    bool isPositioned = styles['positioned'] != null;
 
     late Widget widget;
+    double? spacing = styles['spacing'];
+    double? spacingX = styles['x-spacing'];
+    double? spacingY = styles['y-spacing'];
 
     if (isRow) {
       widget = Row(
@@ -38,8 +41,8 @@ class FContainer extends StatelessWidget {
       widget = Wrap(
         // crossAxisAlignment:
         //     styles['crossAxisAlignment'] ?? CrossAxisAlignment.start,
-        spacing: styles['x-spacing'],
-        runSpacing: styles['y-spacing'],
+        spacing: spacing ?? (spacingX ?? 0.0),
+        runSpacing: spacing ?? (spacingY ?? 0.0),
         children: children,
       );
     } else if (isStack) {
@@ -52,13 +55,14 @@ class FContainer extends StatelessWidget {
         children: children,
       );
     } else if (isGridView) {
+      int crossAxisCount = q.intValueOf("grid-cols-") ?? 2;
       widget = GridView(
         padding: EdgeInsets.zero,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: 1.0,
-          crossAxisCount: 4,
-          mainAxisSpacing: styles['y-spacing'],
-          crossAxisSpacing: styles['x-spacing'],
+          crossAxisCount: crossAxisCount,
+          crossAxisSpacing: spacing ?? (spacingX ?? 0.0),
+          mainAxisSpacing: spacing ?? (spacingY ?? 0.0),
         ),
         shrinkWrap: true,
         physics: const ScrollPhysics(),
@@ -81,7 +85,8 @@ class FContainer extends StatelessWidget {
         children: children,
       );
     }
-    return Container(
+
+    final container = Container(
       margin: styles['margin'],
       padding: styles['padding'],
       width: styles['width'],
@@ -99,17 +104,25 @@ class FContainer extends StatelessWidget {
         ),
         child: widget,
       ),
-    )
-        .animate()
-        .move(
-          duration: Duration(milliseconds: 500),
-          begin: Offset(30, 0),
-        )
-        .fadeIn(
-          duration: Duration(milliseconds: 500),
-        )
-        .shimmer(
-          duration: Duration(milliseconds: 500),
-        );
+    );
+
+    late Widget finalWidget;
+    if (isPositioned) {
+      finalWidget = Positioned(
+        left: styles['positioned']['left'],
+        right: styles['positioned']['right'],
+        top: styles['positioned']['top'],
+        bottom: styles['positioned']['bottom'],
+        // left: 10,
+        // top: 10,
+        // right: 10,
+        // bottom: 10,
+        child: container,
+      );
+    } else {
+      finalWidget = container;
+    }
+
+    return finalWidget;
   }
 }

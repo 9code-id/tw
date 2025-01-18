@@ -22,7 +22,8 @@ Map<String, dynamic> parseTailwindStyles(BuildContext context, String q) {
   styles['boxShadow'] = parseShadow(q);
 
   // Parsing border
-  if (q.contains('border')) styles['border'] = Border.all(color: Colors.black);
+  if (q.matchContains('border'))
+    styles['border'] = Border.all(color: Colors.black);
 
   // Parsing text alignment
   styles['crossAxisAlignment'] = parseTextAlignment(q);
@@ -40,8 +41,29 @@ Map<String, dynamic> parseTailwindStyles(BuildContext context, String q) {
   styles['spacing'] = parseSpacing(q);
   styles['x-spacing'] = parseXSpacing(q);
   styles['y-spacing'] = parseYSpacing(q);
+  styles['positioned'] = parsePositioned(q);
 
   return styles;
+}
+
+Map<String, dynamic>? parsePositioned(String q) {
+  double? left = doubleValueOf("left-", q);
+  double? right = doubleValueOf("right-", q);
+  double? top = doubleValueOf("top-", q);
+  double? bottom = doubleValueOf("bottom-", q);
+
+  bool isPositioned =
+      left != null || right != null || top != null || bottom != null;
+
+  if (isPositioned) {
+    return {
+      'left': left,
+      'right': right,
+      'top': top,
+      'bottom': bottom,
+    };
+  }
+  return null;
 }
 
 Color? parseBgColor(String q) {
@@ -96,125 +118,58 @@ Color getColorFromNameAndShade(String color, int shade) {
   }
 }
 
-EdgeInsets? parsePadding(String q) {
-  final padding = <String, double>{};
+//eg getValueOf("gap-")
+double? doubleValueOf(String key, String q) {
+  final regex = RegExp(r'(?<!\S)' + key + r'(\d+)');
+  final match = regex.firstMatch(q);
 
-  final regex = RegExp(r'p[trblxy]?-(\d+)');
-  final matches = regex.allMatches(q);
-
-  for (final match in matches) {
-    final value = double.parse(match.group(1)!) * 4;
-    final type = match.group(0)!.substring(1, 2);
-
-    switch (type) {
-      case 't':
-        padding['top'] = value;
-        break;
-      case 'r':
-        padding['right'] = value;
-        break;
-      case 'b':
-        padding['bottom'] = value;
-        break;
-      case 'l':
-        padding['left'] = value;
-        break;
-      case 'x':
-        padding['left'] = value;
-        padding['right'] = value;
-        break;
-      case 'y':
-        padding['top'] = value;
-        padding['bottom'] = value;
-        break;
-      default:
-        padding['all'] = value;
-    }
+  if (match != null) {
+    return double.tryParse(match.group(1)!);
   }
 
-  return EdgeInsets.only(
-    top: padding['top'] ?? padding['all'] ?? 0,
-    right: padding['right'] ?? padding['all'] ?? 0,
-    bottom: padding['bottom'] ?? padding['all'] ?? 0,
-    left: padding['left'] ?? padding['all'] ?? 0,
-  );
+  return null;
 }
 
 double parseSpacing(String q) {
-  final regex = RegExp(r'gap-?(\d+)');
-  final match = regex.firstMatch(q);
-
-  if (match != null) {
-    return double.tryParse(match.group(1)!) ?? 0.0;
-  }
-
-  return 0.0;
+  return doubleValueOf("gap-", q) ?? 0;
 }
 
 double parseXSpacing(String q) {
-  final regex = RegExp(r'gap-x-?(\d+)');
-  final match = regex.firstMatch(q);
-
-  if (match != null) {
-    return double.tryParse(match.group(1)!) ?? 0.0;
-  }
-
-  return 0.0;
+  return doubleValueOf("gap-x-", q) ?? 0;
 }
 
 double parseYSpacing(String q) {
-  final regex = RegExp(r'gap-y-?(\d+)');
-  final match = regex.firstMatch(q);
+  return doubleValueOf("gap-y-", q) ?? 0;
+}
 
-  if (match != null) {
-    return double.tryParse(match.group(1)!) ?? 0.0;
-  }
-
-  return 0.0;
+EdgeInsets? parsePadding(String q) {
+  return parseMarginOrPadding("p", q);
 }
 
 EdgeInsets? parseMargin(String q) {
-  final margin = <String, double>{};
+  return parseMarginOrPadding("m", q);
+}
 
-  final regex = RegExp(r'm[trblxy]?-(\d+)');
-  final matches = regex.allMatches(q);
+EdgeInsets? parseMarginOrPadding(String symbol, String q) {
+  final padding = <String, double>{};
 
-  for (final match in matches) {
-    final value = double.parse(match.group(1)!) * 4;
-    final type = match.group(0)!.substring(1, 2);
+  padding["left"] = doubleValueOf("${symbol}l-", q) ?? 0.0;
+  padding["right"] = doubleValueOf("${symbol}r-", q) ?? 0.0;
+  padding["top"] = doubleValueOf("${symbol}t-", q) ?? 0.0;
+  padding["bottom"] = doubleValueOf("${symbol}b-", q) ?? 0.0;
 
-    switch (type) {
-      case 't':
-        margin['top'] = value;
-        break;
-      case 'r':
-        margin['right'] = value;
-        break;
-      case 'b':
-        margin['bottom'] = value;
-        break;
-      case 'l':
-        margin['left'] = value;
-        break;
-      case 'x':
-        margin['left'] = value;
-        margin['right'] = value;
-        break;
-      case 'y':
-        margin['top'] = value;
-        margin['bottom'] = value;
-        break;
-      default:
-        margin['all'] = value;
-    }
+  double? isAllSide = doubleValueOf("${symbol}-", q);
+
+  if (isAllSide != null) {
+    return EdgeInsets.all(isAllSide);
+  } else {
+    return EdgeInsets.only(
+      top: padding['top'] ?? 0,
+      right: padding['right'] ?? 0,
+      bottom: padding['bottom'] ?? 0,
+      left: padding['left'] ?? 0,
+    );
   }
-
-  return EdgeInsets.only(
-    top: margin['top'] ?? margin['all'] ?? 0,
-    right: margin['right'] ?? margin['all'] ?? 0,
-    bottom: margin['bottom'] ?? margin['all'] ?? 0,
-    left: margin['left'] ?? margin['all'] ?? 0,
-  );
 }
 
 BorderRadius? parseRadius(String q) {
@@ -260,36 +215,36 @@ BorderRadius? parseRadius(String q) {
 List<BoxShadow>? parseShadow(String q) {
   final shadows = <BoxShadow>[];
 
-  if (q.contains('shadow-xs')) {
+  if (q.matchContains('shadow-xs')) {
     shadows.add(BoxShadow(color: Colors.black26, blurRadius: 2));
   }
-  if (q.contains('shadow-sm')) {
+  if (q.matchContains('shadow-sm')) {
     shadows.add(BoxShadow(color: Colors.black26, blurRadius: 4));
   }
-  if (q.contains('shadow-md')) {
+  if (q.matchContains('shadow-md')) {
     shadows.add(BoxShadow(color: Colors.black26, blurRadius: 6));
   }
-  if (q.contains('shadow-lg')) {
+  if (q.matchContains('shadow-lg')) {
     shadows.add(BoxShadow(color: Colors.black26, blurRadius: 10));
   }
   if (q.contains('shadow-xl')) {
     shadows.add(BoxShadow(color: Colors.black26, blurRadius: 15));
   }
-  if (q.contains('shadow-2xl')) {
+  if (q.matchContains('shadow-2xl')) {
     shadows.add(BoxShadow(color: Colors.black26, blurRadius: 20));
   }
-  if (q.contains('shadow-inner')) {
+  if (q.matchContains('shadow-inner')) {
     shadows.add(BoxShadow(
         color: Colors.black26,
         blurRadius: 10,
         spreadRadius: -5,
         offset: Offset(0, 5)));
   }
-  if (q.contains('shadow-outline')) {
+  if (q.matchContains('shadow-outline')) {
     shadows
         .add(BoxShadow(color: Colors.black26, blurRadius: 10, spreadRadius: 5));
   }
-  if (q.contains('shadow-none')) {
+  if (q.matchContains('shadow-none')) {
     return null;
   }
 
@@ -301,7 +256,7 @@ double? parseWidth(BuildContext context, String q) {
   // "p-20 w-100 h-100"
   // "w-1/2"
   bool valid = false;
-  valid = q.contains(" w-") || q.startsWith(" w-");
+  valid = q.matchContains("w-");
   if (!valid) return null;
 
   var value = "";
@@ -312,7 +267,6 @@ double? parseWidth(BuildContext context, String q) {
   }
 
   value = value.trim();
-  print("value: $value");
   if (value.contains("%")) {
     return double.parse(value.replaceAll("%", "")) *
         MediaQuery.of(context).size.width /
@@ -328,7 +282,7 @@ double? parseHeight(BuildContext context, String q) {
   // "p-20 w-100 h-100"
   // "h-1/2"
   bool valid = false;
-  valid = q.contains(" h-") || q.startsWith(" h-");
+  valid = q.matchContains("h-");
   if (!valid) return null;
 
   var value = "";
@@ -339,7 +293,6 @@ double? parseHeight(BuildContext context, String q) {
   }
 
   value = value.trim();
-  print("value: $value");
   if (value.contains("%")) {
     return double.parse(value.replaceAll("%", "")) *
         MediaQuery.of(context).size.height /
@@ -385,8 +338,50 @@ double? parseFontSize(String q) {
 }
 
 CrossAxisAlignment? parseTextAlignment(String q) {
-  if (q.contains('text-right')) return CrossAxisAlignment.end;
-  if (q.contains('text-center')) return CrossAxisAlignment.center;
-  if (q.contains('text-left')) return CrossAxisAlignment.start;
+  if (q.matchContains('text-right')) return CrossAxisAlignment.end;
+  if (q.matchContains('text-center')) return CrossAxisAlignment.center;
+  if (q.matchContains('text-left')) return CrossAxisAlignment.start;
   return null;
+}
+
+extension TWStringExtension on String {
+  bool get test {
+    return contains("test");
+  }
+
+  bool matchContains(String search) {
+    String q = this;
+    //q: "list gap-4 pl-20 bg-yellow",
+    // isContainsQuery("p") => false , because there's other cahracter before "p"
+    // isContainsQuery("pl") => true , because "pl" is in the string
+
+    // regex?
+    final regex = RegExp(r'(?<!\S)' + search);
+    final match = regex.firstMatch(q);
+    return match != null;
+  }
+
+  double? doubleValueOf(String key) {
+    String q = this;
+    final regex = RegExp(r'(?<!\S)' + key + r'(\d+)');
+    final match = regex.firstMatch(q);
+
+    if (match != null) {
+      return double.tryParse(match.group(1)!);
+    }
+
+    return null;
+  }
+
+  int? intValueOf(String key) {
+    String q = this;
+    final regex = RegExp(r'(?<!\S)' + key + r'(\d+)');
+    final match = regex.firstMatch(q);
+
+    if (match != null) {
+      return int.tryParse(match.group(1)!);
+    }
+
+    return null;
+  }
 }

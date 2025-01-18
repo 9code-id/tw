@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tw/core.dart';
 
-// highest width: 693
-// highest height: 1197
+// highest width: 1064
+// highest height: 1593
 
 class PreviewWidget extends StatelessWidget {
   @override
@@ -10,281 +10,582 @@ class PreviewWidget extends StatelessWidget {
     return LayoutBuilder(builder: (context, constraints) {
       double mw = constraints.maxWidth;
       double mh = MediaQuery.of(context).size.height;
-      double fmw = 693;
-      double fmh = 1197;
+      double fmw = 1064;
+      double fmh = 1593;
       double ratio = fmw / fmh;
       double rmh = mw / ratio;
       double rmw = mw;
 
       return Container(
-        width: (693 / fmw) * rmw,
-        height: (1197 / fmh) * rmh,
-        child: Stack(
+        width: (1064 / fmw) * rmw,
+        height: (1593 / fmh) * rmh,
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(
+                "https://placehold.co/1064x1593.png?type=FRAME&name=Cardyy Health&Fitness 30"),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Positioned(
-              left: (0 / fmw) * rmw,
-              top: (308 / fmh) * rmh,
-              child: Container(
-                width: (693 / fmw) * rmw,
-                height: (889 / fmh) * rmh,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  shadows: [
-                    BoxShadow(
-                      color: Color(0x268A959E),
-                      blurRadius: 40,
-                      offset: Offset(0, 20),
-                      spreadRadius: 0,
-                    ),
-                  ],
+            Container(
+              width: (1064 / fmw) * rmw,
+              height: (1593 / fmh) * rmh,
+              decoration: ShapeDecoration(
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
                 ),
+                shadows: [
+                  BoxShadow(
+                    color: Color(0x338A959E),
+                    blurRadius: 60,
+                    offset: Offset(0, 30),
+                    spreadRadius: 0,
+                  ),
+                ],
               ),
             ),
-            Positioned(
-              left: (54 / fmw) * rmw,
-              top: (751 / fmh) * rmh,
-              child: Container(
-                width: (586 / fmw) * rmw,
-                height: (375 / fmh) * rmh,
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        "https://placehold.co/586x375.png?type=FRAME&name=Group 57"),
+            Container(
+              width: (410 / fmw) * rmw,
+              height: (385 / fmh) * rmh,
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: (79 / fmw) * rmw,
+                    top: (347 / fmh) * rmh,
+                    child: Container(
+                      width: (244 / fmw) * rmw,
+                      height: (38 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF3F3D56),
+                        shape: OvalBorder(),
+                      ),
+                    ),
                   ),
-                ),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      left: (0 / fmw) * rmw,
-                      top: (0 / fmh) * rmh,
-                      child: Text(
-                        'Avacado Salad',
-                        style: TextStyle(
-                          color: Color(0xFF1D1D1D),
-                          fontSize: 42.75 * rmw / fmw,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w700,
-                        ),
+                  Positioned(
+                    left: (183 / fmw) * rmw,
+                    top: (32 / fmh) * rmh,
+                    child: Container(
+                      width: (56 / fmw) * rmw,
+                      height: (56 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF2F2E41),
+                        shape: OvalBorder(),
                       ),
                     ),
-                    Positioned(
-                      left: (475.95 / fmw) * rmw,
-                      top: (10.45 / fmh) * rmh,
-                      child: Text(
-                        '20 Mins',
-                        style: TextStyle(
-                          color: Color(0xFF1D1D1D),
-                          fontSize: 25.65 * rmw / fmw,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w700,
-                        ),
+                  ),
+                  Positioned(
+                    left: (193 / fmw) * rmw,
+                    top: (54 / fmh) * rmh,
+                    child: Container(
+                      width: (36 / fmw) * rmw,
+                      height: (36 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFFA0616A),
+                        shape: OvalBorder(),
                       ),
                     ),
-                    Positioned(
-                      left: (429.40 / fmw) * rmw,
-                      top: (10.45 / fmh) * rmh,
+                  ),
+                  Positioned(
+                    left: (216 / fmw) * rmw,
+                    top: (113 / fmh) * rmh,
+                    child: Container(
+                      width: (4 / fmw) * rmw,
+                      height: (2 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF3F3D56),
+                        shape: OvalBorder(),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (214 / fmw) * rmw,
+                    top: (114 / fmh) * rmh,
+                    child: Container(
+                      width: (9 / fmw) * rmw,
+                      height: (4 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF5251FA),
+                        shape: OvalBorder(),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (213 / fmw) * rmw,
+                    top: (118 / fmh) * rmh,
+                    child: Container(
+                      width: (10 / fmw) * rmw,
+                      height: (7 / fmh) * rmh,
+                      decoration: BoxDecoration(color: Color(0xFF6C63FF)),
+                    ),
+                  ),
+                  Positioned(
+                    left: (206 / fmw) * rmw,
+                    top: (129 / fmh) * rmh,
+                    child: Container(
+                      width: (24 / fmw) * rmw,
+                      height: (37 / fmh) * rmh,
+                      decoration: BoxDecoration(color: Color(0xFF5251FA)),
+                    ),
+                  ),
+                  Positioned(
+                    left: (205 / fmw) * rmw,
+                    top: (133 / fmh) * rmh,
+                    child: Container(
+                      width: (26 / fmw) * rmw,
+                      height: (3 / fmh) * rmh,
+                      decoration: BoxDecoration(color: Color(0xFF3F3D56)),
+                    ),
+                  ),
+                  Positioned(
+                    left: (206 / fmw) * rmw,
+                    top: (160 / fmh) * rmh,
+                    child: Container(
+                      width: (26 / fmw) * rmw,
+                      height: (3 / fmh) * rmh,
+                      decoration: BoxDecoration(color: Color(0xFF3F3D56)),
+                    ),
+                  ),
+                  Positioned(
+                    left: (205 / fmw) * rmw,
+                    top: (148 / fmh) * rmh,
+                    child: Container(
+                      width: (26 / fmw) * rmw,
+                      height: (6 / fmh) * rmh,
+                      decoration: BoxDecoration(color: Color(0xFF3F3D56)),
+                    ),
+                  ),
+                  Positioned(
+                    left: (212 / fmw) * rmw,
+                    top: (117 / fmh) * rmh,
+                    child: Container(
+                      width: (12 / fmw) * rmw,
+                      height: (4 / fmh) * rmh,
+                      decoration: BoxDecoration(color: Color(0xFF3F3D56)),
+                    ),
+                  ),
+                  Positioned(
+                    left: (207 / fmw) * rmw,
+                    top: (138 / fmh) * rmh,
+                    child: Opacity(
+                      opacity: 0.10,
                       child: Container(
-                        width: (30.40 / fmw) * rmw,
-                        height: (30.40 / fmh) * rmh,
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              left: (0 / fmw) * rmw,
-                              top: (0 / fmh) * rmh,
-                              child: Container(
-                                width: (30.40 / fmw) * rmw,
-                                height: (30.40 / fmh) * rmh,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/fbbf310d-d36c-469a-8c3c-f1b0f32559b7?type=RECTANGLE&name=Bitmap"),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: (0 / fmw) * rmw,
-                              top: (0 / fmh) * rmh,
-                              child: Container(
-                                width: (30.40 / fmw) * rmw,
-                                height: (30.40 / fmh) * rmh,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/0b94d722-5b4c-4ed7-93ad-5820d394d4d3?type=RECTANGLE&name=Bitmap"),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: (0 / fmw) * rmw,
-                              top: (0 / fmh) * rmh,
-                              child: Container(
-                                width: (30.40 / fmw) * rmw,
-                                height: (30.40 / fmh) * rmh,
-                                decoration:
-                                    BoxDecoration(color: Color(0xFFFABB05)),
-                              ),
-                            ),
-                          ],
-                        ),
+                        width: (2 / fmw) * rmw,
+                        height: (9 / fmh) * rmh,
+                        decoration: BoxDecoration(color: Colors.white),
                       ),
                     ),
-                    Positioned(
-                      left: (0 / fmw) * rmw,
-                      top: (91.20 / fmh) * rmh,
-                      child: Text(
-                        'Avacado Salad with tomato and cucumbers our chefs\nspecial salad with tomato and cucumbers our chefs\nspecial healthy and fat free salad for those who want\nto lose weight, ',
-                        style: TextStyle(
-                          color: Color(0xCC8A959E),
-                          fontSize: 22.23 * rmw / fmw,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: (0 / fmw) * rmw,
-                      top: (273.75 / fmh) * rmh,
-                      child: Text(
-                        'Total Price',
-                        style: TextStyle(
-                          color: Color(0xCC8A959E),
-                          fontSize: 24 * rmw / fmw,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: (265.05 / fmw) * rmw,
-                      top: (292.60 / fmh) * rmh,
+                  ),
+                  Positioned(
+                    left: (207 / fmw) * rmw,
+                    top: (155 / fmh) * rmh,
+                    child: Opacity(
+                      opacity: 0.10,
                       child: Container(
-                        width: (81.70 / fmw) * rmw,
-                        height: (81.70 / fmh) * rmh,
+                        width: (2 / fmw) * rmw,
+                        height: (3 / fmh) * rmh,
+                        decoration: BoxDecoration(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (177 / fmw) * rmw,
+                    top: (31 / fmh) * rmh,
+                    child: Container(
+                      width: (17 / fmw) * rmw,
+                      height: (17 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF2F2E41),
+                        shape: OvalBorder(),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (228 / fmw) * rmw,
+                    top: (29 / fmh) * rmh,
+                    child: Container(
+                      width: (17 / fmw) * rmw,
+                      height: (17 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF2F2E41),
+                        shape: OvalBorder(),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (114 / fmw) * rmw,
+                    top: (183 / fmh) * rmh,
+                    child: Container(
+                      width: (30 / fmw) * rmw,
+                      height: (30 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF5251FA),
+                        shape: OvalBorder(),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (114.22 / fmw) * rmw,
+                    top: (200.67 / fmh) * rmh,
+                    child: Transform(
+                      transform: Matrix4.identity()
+                        ..translate(0.0, 0.0)
+                        ..rotateZ(-0.68),
+                      child: Container(
+                        width: (6.78 / fmw) * rmw,
+                        height: (14.90 / fmh) * rmh,
                         decoration: ShapeDecoration(
-                          color: Color(0x33FABB05),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(41.04),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: (289.75 / fmw) * rmw,
-                      top: (318.25 / fmh) * rmh,
-                      child: Container(
-                        width: (38 / fmw) * rmw,
-                        height: (32.30 / fmh) * rmh,
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              left: (0 / fmw) * rmw,
-                              top: (0 / fmh) * rmh,
-                              child: Container(
-                                width: (38 / fmw) * rmw,
-                                height: (32.30 / fmh) * rmh,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/f260e02a-eb71-4416-9c64-bffd1dcd2a2d?type=RECTANGLE&name=Bitmap Copy"),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: (0 / fmw) * rmw,
-                              top: (0 / fmh) * rmh,
-                              child: Container(
-                                width: (38 / fmw) * rmw,
-                                height: (32.30 / fmh) * rmh,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/666a4fa6-9fed-470b-a774-73f3b0195f3a?type=RECTANGLE&name=Bitmap Copy"),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: (0 / fmw) * rmw,
-                              top: (0 / fmh) * rmh,
-                              child: Container(
-                                width: (38 / fmw) * rmw,
-                                height: (32.30 / fmh) * rmh,
-                                decoration:
-                                    BoxDecoration(color: Color(0xFFFABB05)),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: (367.65 / fmw) * rmw,
-                      top: (292.60 / fmh) * rmh,
-                      child: Container(
-                        width: (217.55 / fmw) * rmw,
-                        height: (81.70 / fmh) * rmh,
-                        decoration: ShapeDecoration(
-                          color: Color(0xFFF85A2A),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.84),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: (0 / fmw) * rmw,
-                      top: (318.25 / fmh) * rmh,
-                      child: Text(
-                        '\$12.00',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 42.75 * rmw / fmw,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: (410.40 / fmw) * rmw,
-                      top: (318.25 / fmh) * rmh,
-                      child: Text(
-                        'Add to Cart',
-                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 25.65 * rmw / fmw,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w700,
+                          shape: OvalBorder(),
                         ),
                       ),
                     ),
-                  ],
+                  ),
+                  Positioned(
+                    left: (17 / fmw) * rmw,
+                    top: (139 / fmh) * rmh,
+                    child: Container(
+                      width: (30 / fmw) * rmw,
+                      height: (30 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF3F3D56),
+                        shape: OvalBorder(),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (16.87 / fmw) * rmw,
+                    top: (157.65 / fmh) * rmh,
+                    child: Transform(
+                      transform: Matrix4.identity()
+                        ..translate(0.0, 0.0)
+                        ..rotateZ(-1.31),
+                      child: Container(
+                        width: (14.90 / fmw) * rmw,
+                        height: (6.78 / fmh) * rmh,
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (0 / fmw) * rmw,
+                    top: (57 / fmh) * rmh,
+                    child: Container(
+                      width: (19 / fmw) * rmw,
+                      height: (19 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF3F3D56),
+                        shape: OvalBorder(),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (0.43 / fmw) * rmw,
+                    top: (68.75 / fmh) * rmh,
+                    child: Transform(
+                      transform: Matrix4.identity()
+                        ..translate(0.0, 0.0)
+                        ..rotateZ(-1.31),
+                      child: Container(
+                        width: (9.28 / fmw) * rmw,
+                        height: (4.22 / fmh) * rmh,
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (97 / fmw) * rmw,
+                    top: (287 / fmh) * rmh,
+                    child: Container(
+                      width: (19 / fmw) * rmw,
+                      height: (19 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF3F3D56),
+                        shape: OvalBorder(),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (96.72 / fmw) * rmw,
+                    top: (298.38 / fmh) * rmh,
+                    child: Transform(
+                      transform: Matrix4.identity()
+                        ..translate(0.0, 0.0)
+                        ..rotateZ(-1.31),
+                      child: Container(
+                        width: (9.28 / fmw) * rmw,
+                        height: (4.22 / fmh) * rmh,
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (380 / fmw) * rmw,
+                    top: (172 / fmh) * rmh,
+                    child: Container(
+                      width: (30 / fmw) * rmw,
+                      height: (30 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF3F3D56),
+                        shape: OvalBorder(),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (381 / fmw) * rmw,
+                    top: (180 / fmh) * rmh,
+                    child: Container(
+                      width: (7 / fmw) * rmw,
+                      height: (15 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: OvalBorder(),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (332 / fmw) * rmw,
+                    top: (77 / fmh) * rmh,
+                    child: Container(
+                      width: (30 / fmw) * rmw,
+                      height: (30 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF5251FA),
+                        shape: OvalBorder(),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (332.69 / fmw) * rmw,
+                    top: (85.11 / fmh) * rmh,
+                    child: Transform(
+                      transform: Matrix4.identity()
+                        ..translate(0.0, 0.0)
+                        ..rotateZ(-0.63),
+                      child: Container(
+                        width: (14.91 / fmw) * rmw,
+                        height: (6.77 / fmh) * rmh,
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (375 / fmw) * rmw,
+                    top: (0 / fmh) * rmh,
+                    child: Container(
+                      width: (19 / fmw) * rmw,
+                      height: (19 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF5251FA),
+                        shape: OvalBorder(),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (375.92 / fmw) * rmw,
+                    top: (5.67 / fmh) * rmh,
+                    child: Transform(
+                      transform: Matrix4.identity()
+                        ..translate(0.0, 0.0)
+                        ..rotateZ(-0.63),
+                      child: Container(
+                        width: (9.29 / fmw) * rmw,
+                        height: (4.22 / fmh) * rmh,
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (305 / fmw) * rmw,
+                    top: (239 / fmh) * rmh,
+                    child: Container(
+                      width: (19 / fmw) * rmw,
+                      height: (19 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF3F3D56),
+                        shape: OvalBorder(),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (306.10 / fmw) * rmw,
+                    top: (244.66 / fmh) * rmh,
+                    child: Transform(
+                      transform: Matrix4.identity()
+                        ..translate(0.0, 0.0)
+                        ..rotateZ(-0.63),
+                      child: Container(
+                        width: (9.29 / fmw) * rmw,
+                        height: (4.22 / fmh) * rmh,
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: (455 / fmw) * rmw,
+              child: Text(
+                'Weight Reminder',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color(0xFF1D1D1D),
+                  fontSize: 55 * rmw / fmw,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
-            Positioned(
-              left: (0 / fmw) * rmw,
-              top: (0 / fmh) * rmh,
-              child: Container(
-                width: (693 / fmw) * rmw,
-                height: (694.50 / fmh) * rmh,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/c7ccadc4-4b36-4c5d-a9c7-86cda7a808e7?type=RECTANGLE&name=111111 copy"),
-                    fit: BoxFit.cover,
-                  ),
+            SizedBox(
+              width: (598 / fmw) * rmw,
+              child: Text(
+                'Choose a day to weigh yourself and we\nwill send you the reminder',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color(0xCC8A959E),
+                  fontSize: 28.50 * rmw / fmw,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
                 ),
+              ),
+            ),
+            Text(
+              'SELECTED DAY (4)',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Color(0xFF5452FC),
+                fontSize: 27 * rmw / fmw,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Text(
+              'Monday',
+              style: TextStyle(
+                color: Color(0xFF1D1D1D),
+                fontSize: 35 * rmw / fmw,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Text(
+              'Friday',
+              style: TextStyle(
+                color: Color(0xFF1D1D1D),
+                fontSize: 35 * rmw / fmw,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Text(
+              'Tuesday',
+              style: TextStyle(
+                color: Color(0xFF1D1D1D),
+                fontSize: 35 * rmw / fmw,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Text(
+              'Saturday',
+              style: TextStyle(
+                color: Color(0xFF1D1D1D),
+                fontSize: 35 * rmw / fmw,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Text(
+              'Wednesday',
+              style: TextStyle(
+                color: Color(0xFF1D1D1D),
+                fontSize: 35 * rmw / fmw,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Text(
+              'Sunday',
+              style: TextStyle(
+                color: Color(0xFF1D1D1D),
+                fontSize: 35 * rmw / fmw,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Text(
+              'Thursday',
+              style: TextStyle(
+                color: Color(0xFF1D1D1D),
+                fontSize: 35 * rmw / fmw,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Container(
+              width: (431 / fmw) * rmw,
+              height: (122 / fmh) * rmh,
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(
+                      "https://placehold.co/431x122.png?type=FRAME&name=Group 3"),
+                ),
+              ),
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: (0 / fmw) * rmw,
+                    top: (0 / fmh) * rmh,
+                    child: Container(
+                      width: (431 / fmw) * rmw,
+                      height: (121.50 / fmh) * rmh,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF00CF99),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(22.50),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (98.50 / fmw) * rmw,
+                    top: (37.50 / fmh) * rmh,
+                    child: Text(
+                      'Set Reminder',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 37.50 * rmw / fmw,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
